@@ -1,6 +1,7 @@
 package guru.springframework.recipeproject.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 // Defines the POJO as Entity
 @Entity
@@ -19,14 +20,23 @@ public class Recipe {
     private String directions;
     //to add
     // private Difficulty difficulty;
+
     // @OneToOne - Define one to One relationship with Notes Entity
     ///cascade = CascadeType.ALL - Defines Recipe as the owner of the relation and all the cascade options will
     // be applicable to the child entity
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
     // defines Blob binary type in the DB
     @Lob
     private Byte[] image;
+
+    // @OneToMany - Define one to Many relationship with Ingredient Entity and mapped with Recipe
+    ///cascade = CascadeType.ALL - Defines Recipe as the owner of the relation and all the cascade options will
+    // be applicable to the child entity
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe" )
+    private Set<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -106,5 +116,13 @@ public class Recipe {
 
     public void setImage(Byte[] image) {
         this.image = image;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
