@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 // Defines the POJO as Entity
+// One to One Unidirectional relationship with UnitOfMeasure
 @Entity
 public class Ingredient {
     /// Properties
@@ -15,6 +16,9 @@ public class Ingredient {
     private BigDecimal amount;
     @ManyToOne
     private Recipe recipe;
+    ///FetchType - Eagerly loading from DB
+    @OneToOne(fetch = FetchType.EAGER)
+    private UnitOfMeasure uom;
 
     /// Setters and Getters
 
@@ -48,5 +52,13 @@ public class Ingredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 }

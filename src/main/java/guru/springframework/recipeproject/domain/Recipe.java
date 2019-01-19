@@ -18,8 +18,9 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //to add
-    // private Difficulty difficulty;
+    ///Enumerations
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
 
     // @OneToOne - Define one to One relationship with Notes Entity
     ///cascade = CascadeType.ALL - Defines Recipe as the owner of the relation and all the cascade options will
@@ -124,5 +125,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
